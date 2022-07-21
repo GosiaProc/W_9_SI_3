@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <stdexcept>
+
 class Stos {
 	std::vector <std::string> wektorek;
 	int limit;
@@ -9,7 +11,7 @@ class Stos {
 		if (wektorek.size() < limit) {
 			wektorek.push_back(tekst);
 		} else {
-			std::cout << "Stos sie przepelnil" << std::endl;
+			throw std::invalid_argument("Stos sie przepelnil");
 		}
 	}
 
@@ -19,7 +21,7 @@ class Stos {
 			
 			return lastText;
 		} else {
-			return " Stos jest pusty ";
+			throw std::invalid_argument("Stos jest pusty nie mozna zrobic peek");
 		}
 	}
 
@@ -29,7 +31,7 @@ class Stos {
 			wektorek.pop_back();
 			return lastText;
 		} else {
-			return "Stos jest pusty";
+			throw std::invalid_argument("Stos jest pusty nie mozna zrobic pop");
 		}
 	}
 
@@ -44,45 +46,54 @@ class Stos {
 
 int main(void) {
 
-	std::string a = "Tekst 1";
-	std::string b = "Tekst 2";
+	try {
 
-	Stos stosik(4);
-	stosik.push(a); 
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	stosik.push(a);
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	stosik.push(b);
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	stosik.push(a);
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	stosik.push(a);
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
-	std::cout << stosik.pop()<<std::endl;
-	std::cout << stosik.peek() << std::endl;
-	std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::string a = "Tekst 1";
+		std::string b = "Tekst 2";
 
+		Stos stosik(4);
+		stosik.push(a);
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		stosik.push(a);
+		std::cout << stosik.peek() << std::endl;
 
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
 
-	
+		stosik.push(b);
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		stosik.push(a);
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		stosik.push(a);
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+		std::cout << stosik.pop() << std::endl;
+		std::cout << stosik.peek() << std::endl;
+		std::cout << "Wolnych miejsc :" << stosik.freeSpaceCounter() << std::endl;
+
+	}
+		catch (std::invalid_argument& e)
+		{
+			std::cerr<< "wyjatek zlapany  :  " << e.what() << std::endl;
+			return -1;
+		}
+		return 0;
 }
